@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#101b2a">
+    <meta name="description" content="TrustVault secure document sharing dashboard">
+    <title>TrustVault | Secure document sharing</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css">
+    <script src="/app.js" defer></script>
+  </head>
+  <body>
+    <main id="app" aria-live="polite">
+      <section class="auth-shell" id="auth-view" hidden>
+        <div class="auth-visual">
+          <a class="brand brand-large" href="#"><span class="brand-mark" aria-hidden="true">T</span><span>trustvault</span></a>
+          <div class="auth-visual-copy"><p class="eyebrow">PRIVATE BY DESIGN</p><h1>Your files.<br>On your terms.</h1><p>Secure documents, shared with intention.</p></div>
+          <div class="visual-footer"><span class="status-dot"></span>Encrypted storage · Access you control</div>
+        </div>
+        <div class="auth-panel">
+          <div class="auth-mobile-brand brand"><span class="brand-mark" aria-hidden="true">T</span><span>trustvault</span></div>
+          <div class="auth-form-wrap"><p class="eyebrow">WELCOME BACK</p><h2>Sign in to TrustVault</h2><p class="muted auth-subtitle">Your secure workspace is ready.</p>
+            <form id="login-form" class="stack-form">
+              <label for="login-email">Email address</label><input id="login-email" name="email" type="email" autocomplete="username" placeholder="you@example.com" required maxlength="254">
+              <label for="login-password">Password</label><div class="password-field"><input id="login-password" name="password" type="password" autocomplete="current-password" required maxlength="128"><button class="password-toggle" type="button" aria-label="Show password">Show</button></div>
+              <button class="button button-primary button-wide" type="submit">Sign in <span aria-hidden="true">→</span></button><p class="form-message" id="login-message" role="status"></p>
+            </form><p class="auth-footnote">Access is provided by your TrustVault administrator.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="workspace" id="workspace-view" hidden>
+        <aside class="sidebar" id="sidebar">
+          <a class="brand" href="#dashboard"><span class="brand-mark" aria-hidden="true">T</span><span>trustvault</span></a>
+          <div class="workspace-label">WORKSPACE</div>
+          <nav class="side-nav" aria-label="Main navigation">
+            <button class="nav-item active" data-view="documents"><span class="nav-icon" aria-hidden="true">▦</span> Documents <span class="nav-count" id="document-count">0</span></button>
+            <button class="nav-item" data-view="activity"><span class="nav-icon" aria-hidden="true">◷</span> Activity</button>
+            <button class="nav-item admin-only" data-view="people" hidden><span class="nav-icon" aria-hidden="true">♙</span> People</button>
+            <button class="nav-item admin-only" data-view="settings" hidden><span class="nav-icon" aria-hidden="true">⚙</span> Settings</button>
+          </nav>
+          <div class="sidebar-spacer"></div>
+          <div class="storage-note"><span class="storage-icon" aria-hidden="true">✳</span><div><strong>Private storage</strong><span>Access is always checked</span></div></div>
+          <button class="account-menu" id="account-button" type="button"><span class="avatar" id="user-avatar">U</span><span class="account-copy"><strong id="user-name">User</strong><span id="user-role">Owner</span></span><span aria-hidden="true">⌄</span></button>
+        </aside>
+        <section class="main-column">
+          <header class="topbar"><button class="icon-button mobile-menu" id="menu-button" type="button" aria-label="Toggle navigation" aria-expanded="false">☰</button><div class="breadcrumb"><span>Workspace</span><span class="crumb-slash">/</span><strong id="page-title">Documents</strong></div><div class="topbar-actions"><span class="secure-label"><span class="status-dot"></span>Secure session</span><button class="button button-primary upload-trigger" type="button"><span aria-hidden="true">＋</span> Upload document</button></div></header>
+          <div class="content-area">
+            <div class="page-heading"><div><p class="eyebrow" id="page-kicker">YOUR WORKSPACE</p><h1 id="heading-title">Documents</h1><p class="muted" id="heading-description">A calm, secure home for the files that matter.</p></div><div class="heading-actions" id="heading-actions"><button class="button button-quiet upload-trigger" type="button"><span aria-hidden="true">＋</span> Add document</button></div></div>
+            <section class="stats-row" aria-label="Document summary"><div class="stat-block"><span class="stat-label">YOUR DOCUMENTS</span><div><strong id="stat-owned">0</strong><span class="stat-detail">owned by you</span></div></div><div class="stat-block"><span class="stat-label">SHARED WITH YOU</span><div><strong id="stat-shared">0</strong><span class="stat-detail">available to access</span></div></div><div class="stat-block stat-audit"><span class="stat-label">LATEST ACTIVITY</span><div><strong id="stat-activity">—</strong><span class="stat-detail" id="stat-activity-time">No recent activity</span></div></div></section>
+            <section class="panel document-panel" id="document-panel">
+              <div class="panel-heading"><div><h2>All documents</h2><p class="muted">Files you own and files shared with you</p></div><button class="button button-quiet mobile-upload-trigger" type="button">＋ Upload</button></div>
+              <div class="table-toolbar"><label class="search-box"><span aria-hidden="true">⌕</span><input id="search-input" type="search" placeholder="Search documents" aria-label="Search documents"><kbd>/</kbd></label><div class="segmented" role="group" aria-label="Filter documents"><button class="segment active" data-filter="all" type="button">All</button><button class="segment" data-filter="owned" type="button">Owned</button><button class="segment" data-filter="shared" type="button">Shared</button></div></div>
+              <div class="table-wrap"><table><thead><tr><th scope="col">NAME</th><th scope="col">OWNER</th><th scope="col">ACCESS</th><th scope="col">ADDED</th><th scope="col"><span class="sr-only">Actions</span></th></tr></thead><tbody id="document-rows"></tbody></table></div>
+              <div class="empty-state" id="empty-documents" hidden><div class="empty-glyph" aria-hidden="true">▤</div><h3 id="empty-title">No documents yet</h3><p id="empty-copy">Upload a file to make your first secure document space.</p><button class="button button-primary upload-trigger" type="button">Upload a document</button></div><div class="loading-state" id="documents-loading"><span class="spinner"></span> Loading documents</div>
+            </section>
+            <section class="panel activity-panel" id="activity-panel" hidden><div class="panel-heading"><div><h2>Activity</h2><p class="muted">A record of important actions in your workspace</p></div></div><div class="activity-list" id="activity-list"></div></section>
+            <section class="panel people-panel" id="people-panel" hidden><div class="panel-heading"><div><h2>People</h2><p class="muted">Manage workspace accounts</p></div></div><form class="inline-create-form" id="user-create-form"><div class="form-field"><label for="new-user-name">Name</label><input id="new-user-name" name="displayName" required maxlength="80"></div><div class="form-field"><label for="new-user-email">Email</label><input id="new-user-email" name="email" type="email" required maxlength="254"></div><div class="form-field"><label for="new-user-role">Role</label><select id="new-user-role" name="role"><option value="owner">Owner</option><option value="viewer">Viewer</option></select></div><div class="form-field"><label for="new-user-password">Temporary password</label><input id="new-user-password" name="password" type="password" minlength="12" maxlength="128" required autocomplete="new-password"></div><button class="button button-primary" type="submit">Create account</button><p class="form-message" id="user-create-message" role="status"></p></form><div class="people-list" id="people-list"></div></section>
+            <section class="panel settings-panel" id="settings-panel" hidden><div class="panel-heading"><div><h2>System settings</h2><p class="muted">Control workspace upload behavior</p></div></div><form id="settings-form" class="settings-form"><label class="setting-row" for="uploads-enabled"><span><strong>Allow document uploads</strong><small>Owners and administrators can add new files.</small></span><input id="uploads-enabled" type="checkbox"></label><label class="setting-row" for="upload-limit"><span><strong>Maximum file size</strong><small>Applies to every upload. Maximum supported is 10 MB.</small></span><span class="number-setting"><input id="upload-limit" type="number" min="1" max="10" required><span>MB</span></span></label><div class="settings-actions"><p class="form-message" id="settings-message" role="status"></p><button class="button button-primary" type="submit">Save settings</button></div></form></section>
+            <div class="page-footer"><span>TrustVault</span><span>Secure document sharing</span></div>
+          </div>
+        </section><div class="sidebar-scrim" id="sidebar-scrim"></div>
+      </section>
+
+      <dialog class="modal" id="upload-dialog"><form id="upload-form" class="modal-form" enctype="multipart/form-data"><div class="modal-heading"><div><p class="eyebrow">PRIVATE UPLOAD</p><h2>Add a document</h2></div><button class="icon-button close-dialog" type="button" aria-label="Close">×</button></div><label class="file-drop" for="upload-file"><span class="file-drop-icon" aria-hidden="true">⇧</span><strong id="file-name">Choose a file to upload</strong><span>PDF, PNG, JPG or TXT · Up to 10 MB</span><input id="upload-file" name="file" type="file" accept=".pdf,.png,.jpg,.jpeg,.txt" required></label><label for="upload-title">Display name</label><input id="upload-title" name="title" maxlength="120" placeholder="Optional document title"><label for="upload-description">Notes</label><textarea id="upload-description" name="description" rows="3" maxlength="1000" placeholder="Optional details"></textarea><p class="form-message" id="upload-message" role="status"></p><div class="modal-actions"><button class="button button-quiet close-dialog" type="button">Cancel</button><button class="button button-primary" type="submit">Upload securely</button></div></form></dialog>
+      <dialog class="modal" id="details-dialog"><div class="modal-form"><div class="modal-heading"><div><p class="eyebrow">DOCUMENT DETAILS</p><h2 id="detail-title">Document</h2></div><button class="icon-button close-dialog" type="button" aria-label="Close">×</button></div><div class="detail-meta" id="detail-meta"></div><div class="detail-description" id="detail-description"></div><form id="share-form" class="share-form" hidden><h3>Share access</h3><label for="share-email">Registered user email</label><input id="share-email" name="email" type="email" required placeholder="colleague@example.com"><div class="share-controls"><label class="sr-only" for="share-permission">Permission</label><select id="share-permission" name="permission"><option value="read">Can view</option><option value="edit">Can edit</option></select><button class="button button-primary" type="submit">Share</button></div></form><div class="share-list-wrap" id="share-list-wrap" hidden><h3>People with access</h3><div id="share-list" class="share-list"></div></div><p class="form-message" id="detail-message" role="status"></p><div class="modal-actions"><button class="button button-danger" id="delete-document" type="button" hidden>Delete document</button><span class="modal-spacer"></span><button class="button button-quiet close-dialog" type="button">Close</button><button class="button button-quiet" id="view-document" type="button" hidden>View PDF</button><button class="button button-primary" id="download-document" type="button">Download</button></div></div></dialog>
+      <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    </main>
+  </body>
+</html>
